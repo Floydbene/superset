@@ -45,23 +45,11 @@ It is possible to set only mapbox by removing osm tiles and other way around.
 Setting `DECKGL_BASE_MAP` overwrite default values
 :::
 
-After defining your map tiles, set them in these variables:
-- `CORS_OPTIONS`
-- `connect-src` of `TALISMAN_CONFIG` and `TALISMAN_CONFIG_DEV` variables.
+After defining your map tiles, add them to the `connect-src` directive in
+`TALISMAN_CONFIG` and `TALISMAN_CONFIG_DEV` so the browser's Content Security
+Policy allows the frontend to fetch tiles from those origins:
 
 ```python
-ENABLE_CORS = True
-CORS_OPTIONS: dict[Any, Any] = {
-    "origins": [
-        "https://tile.openstreetmap.org",
-        "https://tile.osm.ch",
-        "https://your_personal_url/{z}/{x}/{y}.png",
-    ]
-}
-
-.
-.
-
 TALISMAN_CONFIG = {
     "content_security_policy": {
         ...
@@ -76,3 +64,10 @@ TALISMAN_CONFIG = {
         ...
 }
 ```
+
+:::note
+`ENABLE_CORS` is **not** required for map tiles. CORS controls which external
+origins may make cross-origin requests *to* the Superset API, whereas map tiles
+are fetched *from* external tile servers by the browser. The CSP `connect-src`
+directive above is what permits those outbound fetches.
+:::
