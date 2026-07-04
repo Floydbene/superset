@@ -231,7 +231,10 @@ class GetCombinedDatasourceListCommand(BaseCommand):
                 try:
                     database_id = int(value)
                 except (TypeError, ValueError):
-                    pass
+                    logger.warning(
+                        "Invalid database filter value %r: expected integer",
+                        value,
+                    )
             elif col == "semantic_layer_uuid" and value is not None:
                 semantic_layer_uuid = str(value)
 

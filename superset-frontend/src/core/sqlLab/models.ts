@@ -132,8 +132,15 @@ export class QueryContext implements sqlLabType.QueryContext {
     let parsed = {};
     try {
       parsed = JSON.parse(this.templateParams);
-    } catch (e) {
-      // ignore invalid format string.
+    } catch {
+      if (this.templateParams) {
+        // Only warn when there is a non-empty string that failed to parse;
+        // empty strings are expected when no template params are set.
+        console.warn(
+          'Failed to parse template parameters as JSON:',
+          this.templateParams,
+        );
+      }
     }
     this.parsedParams = parsed;
 

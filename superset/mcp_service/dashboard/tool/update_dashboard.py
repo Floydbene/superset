@@ -113,7 +113,12 @@ def _merge_json_metadata(dashboard: Any, overrides: dict[str, Any]) -> str:
             if isinstance(parsed := json.loads(dashboard.json_metadata), dict):
                 existing = parsed
         except (ValueError, TypeError):
-            pass
+            logger.warning(
+                "Failed to parse json_metadata for dashboard %s, "
+                "starting from empty metadata",
+                getattr(dashboard, "id", "unknown"),
+                exc_info=True,
+            )
     existing.update(overrides)
     return json.dumps(existing)
 

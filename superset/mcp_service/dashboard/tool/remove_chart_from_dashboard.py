@@ -186,7 +186,11 @@ def _clean_default_filters(metadata: Dict[str, Any], chart_key: str) -> bool:
                 metadata["default_filters"] = json.dumps(default_filters)
                 return True
         except (json.JSONDecodeError, TypeError):
-            pass
+            logger.warning(
+                "Failed to parse default_filters for chart %s",
+                chart_key,
+                exc_info=True,
+            )
     elif isinstance(default_filters_raw, dict) and chart_key in default_filters_raw:
         del default_filters_raw[chart_key]
         # Re-serialize so downstream readers that call json.loads on this field

@@ -516,7 +516,10 @@ export default function sqlLabReducer(
         );
         localStorage.setItem('redux', JSON.stringify({ sqlLab }));
       } catch (error) {
-        // continue regardless of error
+        console.warn(
+          'Failed to update localStorage during query editor migration:',
+          error,
+        );
       }
       // replace localStorage query editor with the server backed one
       return alterInArr(
@@ -535,7 +538,10 @@ export default function sqlLabReducer(
         );
         localStorage.setItem('redux', JSON.stringify({ sqlLab }));
       } catch (error) {
-        // continue regardless of error
+        console.warn(
+          'Failed to update localStorage during table migration:',
+          error,
+        );
       }
 
       // replace localStorage table with the server backed one

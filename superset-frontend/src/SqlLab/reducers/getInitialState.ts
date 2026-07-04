@@ -245,7 +245,10 @@ export default function getInitialState({
       }
     }
   } catch (error) {
-    // continue regardless of error
+    console.warn(
+      'Failed to restore SQL Lab state from localStorage:',
+      error,
+    );
   }
 
   return {
