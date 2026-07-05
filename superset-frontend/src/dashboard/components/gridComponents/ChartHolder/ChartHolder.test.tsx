@@ -397,6 +397,14 @@ describe('ChartHolder', () => {
     expect(computedWidth).toEqual(expectedWidth);
   });
 
+  test('should apply the fade-out border class by default for theme border visibility', async () => {
+    renderWrapper(createMockStore(), { fullSizeChartId: null });
+
+    const chartHolder = screen.getByTestId('dashboard-component-chart-holder');
+    expect(chartHolder).toHaveClass('fade-out');
+    expect(chartHolder).not.toHaveClass('fade-in');
+  });
+
   test('should call deleteComponent when deleted', async () => {
     const deleteComponent = jest.fn();
     const store = createMockStore();
