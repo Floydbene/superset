@@ -623,3 +623,34 @@ test('should maintain layout when switching between tabs', async () => {
   expect(gridContainer).toBeInTheDocument();
   expect(tabPanels.length).toBeGreaterThan(0);
 });
+
+test('default dashboard chart tiles use the active theme border token', () => {
+  (useStoredSidebarWidth as jest.Mock).mockImplementation(() => [
+    100,
+    jest.fn(),
+  ]);
+  (fetchFaveStar as jest.Mock).mockReturnValue({ type: 'mock-action' });
+  (setActiveTab as jest.Mock).mockReturnValue({ type: 'mock-action' });
+
+  const { container } = render(<DashboardBuilder />, {
+    useRedux: true,
+    store: storeWithState(mockState),
+    useDnd: true,
+    useRouter: true,
+    useTheme: true,
+  });
+
+  const dashboardContent = container.querySelector('.dashboard-content');
+  expect(dashboardContent).toBeInTheDocument();
+
+  // Chart tiles in their default (fade-out) state should render a solid
+  // border derived from the active theme's colorBorder token so tile
+  // boundaries stay visible and consistent with other dashboard chrome.
+  expect(dashboardContent).toHaveStyleRule(
+    'border',
+    `1px solid ${supersetTheme.colorBorder}`,
+    {
+      target: '.dashboard-component-chart-holder.fade-out',
+    },
+  );
+});
