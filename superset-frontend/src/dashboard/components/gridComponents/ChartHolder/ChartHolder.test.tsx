@@ -155,6 +155,17 @@ describe('ChartHolder', () => {
     ).toEqual(0);
   });
 
+  test('should render in the default fade-out state so the theme border token applies', async () => {
+    renderWrapper();
+
+    const holder = screen.getByTestId('dashboard-component-chart-holder');
+    // The default (non-highlighted) tile uses the `fade-out` state, whose
+    // border resolves to the active theme `colorBorder` token in
+    // DashboardBuilder styling.
+    expect(holder).toHaveClass('fade-out');
+    expect(holder).not.toHaveClass('fade-in');
+  });
+
   test('should highlight when path matches', async () => {
     const store = createMockStore({
       dashboardState: {
