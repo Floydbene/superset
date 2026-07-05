@@ -35,7 +35,7 @@ const exampleThemes: Record<string, SerializableThemeConfig> = {
   },
   catppuccinMocha: {
     token: {
-      colorPrimary: '#89b4fa',
+      colorPrimary: '#cba6f7',
       colorSuccess: '#a6e3a1',
       colorWarning: '#fab387',
       colorError: '#f38ba8',

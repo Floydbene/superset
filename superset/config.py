@@ -1055,8 +1055,8 @@ _THEME_DEFAULT_BASE: Theme = {
         "brandSpinnerUrl": None,
         "brandSpinnerSvg": None,
         # Catppuccin Mocha palette
-        "colorPrimary": "#89b4fa",  # Blue
-        "colorLink": "#89b4fa",  # Blue
+        "colorPrimary": "#cba6f7",  # Mauve
+        "colorLink": "#cba6f7",  # Mauve
         "colorError": "#f38ba8",  # Red
         "colorWarning": "#fab387",  # Peach
         "colorSuccess": "#a6e3a1",  # Green
