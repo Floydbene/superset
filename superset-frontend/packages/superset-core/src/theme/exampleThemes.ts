@@ -59,12 +59,12 @@ const exampleThemes: Record<string, SerializableThemeConfig> = {
   },
   catppuccinMocha: {
     token: {
-      colorPrimary: '#89b4fa', // Blue
+      colorPrimary: '#f5c2e7', // Pink (magenta)
       colorSuccess: '#a6e3a1', // Green
       colorWarning: '#f9e2af', // Yellow
       colorError: '#f38ba8', // Red
       colorInfo: '#74c7ec', // Sapphire
-      colorLink: '#89b4fa', // Blue
+      colorLink: '#f5c2e7', // Pink (magenta)
       colorTextBase: '#cdd6f4', // Text
       colorBgBase: '#1e1e2e', // Base
       colorBgContainer: '#1e1e2e', // Base
