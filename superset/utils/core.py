@@ -68,7 +68,7 @@ import pandas as pd
 import sqlalchemy as sa
 from cryptography.hazmat.backends import default_backend
 from cryptography.x509 import Certificate, load_pem_x509_certificate
-from flask import current_app as app, g, request
+from flask import current_app as app, g, request, Response
 from flask_appbuilder.security.sqla.models import User
 from flask_babel import gettext as __
 from flask_sqlalchemy import SQLAlchemy
@@ -415,6 +415,27 @@ def sanitize_cookie_token(token: str | None) -> str | None:
     if token and COOKIE_TOKEN_RE.match(token):
         return token
     return None
+
+
+def set_no_cache_headers(response: Response) -> Response:
+    """Mark a response as non-cacheable.
+
+    Generated export downloads are served with ``send_file`` and would otherwise
+    inherit the application-wide ``SEND_FILE_MAX_AGE_DEFAULT`` (one year) cache
+    default meant for immutable static assets. Explicitly override the cache
+    headers so these dynamic downloads are never cached by browsers or shared
+    caches.
+
+    :param response: the response to mutate
+    :return: the same response with non-cacheable cache headers set
+    """
+    response.cache_control.no_cache = True
+    response.cache_control.no_store = True
+    response.cache_control.must_revalidate = True
+    response.cache_control.public = False
+    response.cache_control.max_age = 0
+    response.expires = 0
+    return response
 
 
 def cast_to_num(value: float | int | str | None) -> float | int | None:

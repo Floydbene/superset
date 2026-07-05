@@ -52,6 +52,7 @@ from superset.utils.core import (
     sanitize_cookie_token,
     sanitize_svg_content,
     sanitize_url,
+    set_no_cache_headers,
 )
 from tests.conftest import with_config
 
@@ -1847,3 +1848,23 @@ def test_sanitize_cookie_token_accepts_valid(token: str) -> None:
 )
 def test_sanitize_cookie_token_rejects_invalid(token: Optional[str]) -> None:
     assert sanitize_cookie_token(token) is None
+
+
+def test_set_no_cache_headers_overrides_long_lived_cache() -> None:
+    from flask import Response
+
+    response = Response()
+    # Simulate the long-lived cache default that send_file would inherit.
+    response.cache_control.public = True
+    response.cache_control.max_age = 31536000
+
+    result = set_no_cache_headers(response)
+
+    assert result is response
+    assert response.cache_control.no_cache is True
+    assert response.cache_control.no_store is True
+    assert response.cache_control.must_revalidate is True
+    assert response.cache_control.public is False
+    assert response.cache_control.max_age == 0
+    assert response.expires is not None
+    assert "no-store" in response.headers["Cache-Control"]

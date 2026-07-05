@@ -30,7 +30,7 @@ from superset.commands.importers.v1.assets import ImportAssetsCommand
 from superset.commands.importers.v1.utils import get_contents_from_bundle
 from superset.extensions import event_logger
 from superset.utils import json
-from superset.utils.core import parse_boolean_string
+from superset.utils.core import parse_boolean_string, set_no_cache_headers
 from superset.views.base_api import BaseSupersetApi, requires_form_data, statsd_metrics
 
 
@@ -90,6 +90,7 @@ class ImportExportRestApi(BaseSupersetApi):
             as_attachment=True,
             download_name=filename,
         )
+        set_no_cache_headers(response)
         return response
 
     @expose("/import/", methods=("POST",))
