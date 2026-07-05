@@ -57,5 +57,32 @@ const exampleThemes: Record<string, SerializableThemeConfig> = {
     },
     algorithm: ThemeAlgorithm.DARK,
   },
+  catppuccinMocha: {
+    token: {
+      colorPrimary: '#f5c2e7', // Pink (magenta)
+      colorSuccess: '#a6e3a1', // Green
+      colorWarning: '#f9e2af', // Yellow
+      colorError: '#f38ba8', // Red
+      colorInfo: '#74c7ec', // Sapphire
+      colorLink: '#f5c2e7', // Pink (magenta)
+      colorTextBase: '#cdd6f4', // Text
+      colorBgBase: '#1e1e2e', // Base
+      colorBgContainer: '#1e1e2e', // Base
+      colorBgElevated: '#313244', // Surface0
+      colorBgLayout: '#181825', // Mantle
+      colorBorder: '#585b70', // Surface2
+      colorBorderSecondary: '#45475a', // Surface1
+      colorText: '#cdd6f4', // Text
+      colorTextSecondary: '#bac2de', // Subtext1
+      colorTextTertiary: '#a6adc8', // Subtext0
+      colorTextQuaternary: '#9399b2', // Overlay2
+      colorFill: '#45475a', // Surface1
+      colorFillSecondary: '#313244', // Surface0
+      colorFillTertiary: '#1e1e2e', // Base
+      colorSplit: '#45475a', // Surface1
+      colorHighlight: '#f5c2e7', // Pink (magenta)
+    },
+    algorithm: ThemeAlgorithm.DARK,
+  },
 };
 export default exampleThemes;
