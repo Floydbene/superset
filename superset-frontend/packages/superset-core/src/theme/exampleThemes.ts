@@ -33,6 +33,18 @@ const exampleThemes: Record<string, SerializableThemeConfig> = {
     token: {},
     algorithm: ThemeAlgorithm.COMPACT,
   },
+  catppuccinMocha: {
+    token: {
+      colorPrimary: '#89b4fa',
+      colorSuccess: '#a6e3a1',
+      colorWarning: '#fab387',
+      colorError: '#f38ba8',
+      colorInfo: '#74c7ec',
+      colorBgBase: '#1e1e2e',
+      colorTextBase: '#cdd6f4',
+    },
+    algorithm: ThemeAlgorithm.DARK,
+  },
   funky: {
     token: {
       colorPrimary: '#f759ab', // hot pink

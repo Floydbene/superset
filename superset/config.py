@@ -1054,13 +1054,15 @@ _THEME_DEFAULT_BASE: Theme = {
         # "brandSpinnerUrl": "/static/assets/images/loading.gif",
         "brandSpinnerUrl": None,
         "brandSpinnerSvg": None,
-        # Default colors
-        "colorPrimary": "#2893B3",  # NOTE: previous lighter primary color was #20a7c9 # noqa: E501
-        "colorLink": "#2893B3",
-        "colorError": "#e04355",
-        "colorWarning": "#fcc700",
-        "colorSuccess": "#5ac189",
-        "colorInfo": "#66bcfe",
+        # Catppuccin Mocha palette
+        "colorPrimary": "#89b4fa",  # Blue
+        "colorLink": "#89b4fa",  # Blue
+        "colorError": "#f38ba8",  # Red
+        "colorWarning": "#fab387",  # Peach
+        "colorSuccess": "#a6e3a1",  # Green
+        "colorInfo": "#74c7ec",  # Sapphire
+        "colorBgBase": "#1e1e2e",  # Base
+        "colorTextBase": "#cdd6f4",  # Text
         # Fonts
         "fontUrls": [],
         "fontFamily": "Inter, Helvetica, Arial, sans-serif",
@@ -1074,10 +1076,10 @@ _THEME_DEFAULT_BASE: Theme = {
         "fontWeightLight": "300",
         "fontWeightStrong": "500",
         "fontWeightBold": "700",
-        # Editor selection color (for SQL Lab text highlighting)
-        "colorEditorSelection": "#fff5cf",
+        # Editor selection color (Catppuccin Surface1 for dark bg)
+        "colorEditorSelection": "#45475a",
     },
-    "algorithm": "default",
+    "algorithm": "dark",
 }
 
 THEME_DEFAULT: Theme = _THEME_DEFAULT_BASE
@@ -1095,7 +1097,7 @@ _THEME_DARK_BASE: Theme = {
     "algorithm": "dark",
 }
 
-THEME_DARK: Optional[Theme] = _THEME_DARK_BASE
+THEME_DARK: Optional[Theme] = None
 
 
 def sync_theme_logo_href(
