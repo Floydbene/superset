@@ -336,7 +336,8 @@ const StyledDashboardContent = styled.div<{
       }
 
       &.fade-out {
-        border: ${theme.dashboardTileBorder ?? 'none'};
+        border: ${theme.dashboardTileBorder ??
+        `1px solid ${theme.colorBorder}`};
         border-radius: ${theme.dashboardTileBorderRadius ??
         theme.borderRadius}px;
         box-shadow: ${theme.dashboardTileBoxShadow ??
