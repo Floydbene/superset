@@ -565,7 +565,10 @@ def serialize_chart_object(chart: ChartLike | None) -> ChartInfo | None:
         try:
             chart_form_data = utils_json.loads(chart_params)
         except (TypeError, ValueError):
-            pass
+            logger.debug(
+                "Failed to parse chart params as JSON for chart %s",
+                getattr(chart, "id", "unknown"),
+            )
     elif isinstance(chart_params, dict):
         chart_form_data = chart_params
 

@@ -153,11 +153,18 @@ def _resolve_effective_form_data(
                 if isinstance(parsed, dict):
                     return parsed, True
             except (TypeError, ValueError):
-                pass
+                logger.debug(
+                    "Failed to parse cached form_data for key %s",
+                    form_data_key,
+                )
 
     try:
         saved = utils_json.loads(chart.params) if chart.params else {}
     except (TypeError, ValueError):
+        logger.debug(
+            "Failed to parse chart.params for chart %s",
+            getattr(chart, "id", "unknown"),
+        )
         saved = {}
     return saved if isinstance(saved, dict) else {}, False
 

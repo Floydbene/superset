@@ -491,8 +491,10 @@ class QueryObject:  # pylint: disable=too-many-instance-attributes
         try:
             add_impersonation_cache_key_if_needed(self.datasource.database, cache_dict)  # type: ignore
         except AttributeError:
-            # datasource or database do not exist
-            pass
+            logger.debug(
+                "Skipping impersonation cache key: datasource or database "
+                "not available for QueryObject"
+            )
 
         cache_key = hash_from_dict(
             cache_dict, default=json_int_dttm_ser, ignore_nan=True
