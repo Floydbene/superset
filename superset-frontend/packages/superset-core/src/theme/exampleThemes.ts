@@ -80,6 +80,7 @@ const exampleThemes: Record<string, SerializableThemeConfig> = {
       colorFillSecondary: '#313244', // Surface0
       colorFillTertiary: '#1e1e2e', // Base
       colorSplit: '#45475a', // Surface1
+      colorHighlight: '#f5c2e7', // Pink (magenta)
     },
     algorithm: ThemeAlgorithm.DARK,
   },
