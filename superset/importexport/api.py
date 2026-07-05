@@ -90,6 +90,7 @@ class ImportExportRestApi(BaseSupersetApi):
             as_attachment=True,
             download_name=filename,
         )
+        response.headers["Cache-Control"] = "no-store"
         return response
 
     @expose("/import/", methods=("POST",))

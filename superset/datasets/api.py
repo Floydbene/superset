@@ -577,6 +577,7 @@ class DatasetRestApi(BaseSupersetModelRestApi):
             as_attachment=True,
             download_name=filename,
         )
+        response.headers["Cache-Control"] = "no-store"
         if token := sanitize_cookie_token(request.args.get("token")):
             response.set_cookie(token, "done", max_age=600)
         return response
