@@ -1312,12 +1312,17 @@ STORE_CACHE_KEYS_IN_METADATA_DB = False
 # CORS Options
 # NOTE: enabling this requires installing the cors-related python dependencies
 # `pip install .[cors]` or `pip install apache_superset[cors]`, depending
+# on your pip install mode.
+# CORS controls which *external origins* are allowed to make cross-origin
+# requests TO the Superset backend.  It does NOT control which external
+# resources the frontend can fetch (that is CSP connect-src in TALISMAN_CONFIG).
 ENABLE_CORS = True
 CORS_OPTIONS: dict[Any, Any] = {
+    "supports_credentials": False,
     "origins": [
         "https://tile.openstreetmap.org",
         "https://tile.osm.ch",
-    ]
+    ],
 }
 
 # Sanitizes the HTML content used in markdowns to allow its rendering in a safe manner.
