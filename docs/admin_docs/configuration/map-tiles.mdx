@@ -65,9 +65,16 @@ TALISMAN_CONFIG = {
 }
 ```
 
-:::note
-`ENABLE_CORS` is **not** required for map tiles. CORS controls which external
-origins may make cross-origin requests *to* the Superset API, whereas map tiles
-are fetched *from* external tile servers by the browser. The CSP `connect-src`
-directive above is what permits those outbound fetches.
-:::
+If your deployment also needs CORS (e.g. for cross-origin API access from tile
+providers), enable it in `superset_config.py`:
+
+```python
+ENABLE_CORS = True
+CORS_OPTIONS = {
+    "supports_credentials": False,
+    "origins": [
+        "https://tile.openstreetmap.org",
+        "https://tile.osm.ch",
+    ],
+}
+```

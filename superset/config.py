@@ -1316,11 +1316,13 @@ STORE_CACHE_KEYS_IN_METADATA_DB = False
 # CORS controls which *external origins* are allowed to make cross-origin
 # requests TO the Superset backend.  It does NOT control which external
 # resources the frontend can fetch (that is CSP connect-src in TALISMAN_CONFIG).
-# Leave disabled unless you have a concrete cross-origin integration need
-# (e.g. a separate frontend app calling the Superset REST API).
-ENABLE_CORS = False
+ENABLE_CORS = True
 CORS_OPTIONS: dict[Any, Any] = {
     "supports_credentials": False,
+    "origins": [
+        "https://tile.openstreetmap.org",
+        "https://tile.osm.ch",
+    ],
 }
 
 # Sanitizes the HTML content used in markdowns to allow its rendering in a safe manner.
