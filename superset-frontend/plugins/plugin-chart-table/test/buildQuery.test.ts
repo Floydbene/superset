@@ -315,6 +315,95 @@ describe('plugin-chart-table', () => {
       });
     });
 
+    describe('Clicked-column sort ordering', () => {
+      test('uses ownState.sortBy for orderby without server pagination', () => {
+        const { queries } = buildQuery(
+          {
+            ...basicFormData,
+            query_mode: QueryMode.Aggregate,
+            metrics: ['count', 'sum_sales'],
+            groupby: ['category'],
+          },
+          {
+            ownState: {
+              sortBy: [{ key: 'sum_sales', desc: false }],
+            },
+          },
+        );
+
+        expect(queries[0].orderby).toEqual([['sum_sales', true]]);
+      });
+
+      test('uses ownState.sortBy for orderby with server pagination', () => {
+        const { queries } = buildQuery(
+          {
+            ...basicFormData,
+            query_mode: QueryMode.Aggregate,
+            metrics: ['count', 'sum_sales'],
+            server_pagination: true,
+            groupby: ['category'],
+          },
+          {
+            ownState: {
+              sortBy: [{ key: 'sum_sales', desc: true }],
+            },
+          },
+        );
+
+        expect(queries[0].orderby).toEqual([['sum_sales', false]]);
+      });
+
+      test('falls back to first metric when ownState.sortBy is empty', () => {
+        const { queries } = buildQuery(
+          {
+            ...basicFormData,
+            query_mode: QueryMode.Aggregate,
+            metrics: ['count', 'sum_sales'],
+            groupby: ['category'],
+          },
+          {
+            ownState: {
+              sortBy: [],
+            },
+          },
+        );
+
+        expect(queries[0].orderby).toEqual([['count', false]]);
+      });
+
+      test('falls back to first metric when ownState.sortBy is undefined', () => {
+        const { queries } = buildQuery({
+          ...basicFormData,
+          query_mode: QueryMode.Aggregate,
+          metrics: ['count', 'sum_sales'],
+          groupby: ['category'],
+        });
+
+        expect(queries[0].orderby).toEqual([['count', false]]);
+      });
+
+      test('prefers sortByMetric over ownState.sortBy when both are set', () => {
+        const { queries } = buildQuery(
+          {
+            ...basicFormData,
+            query_mode: QueryMode.Aggregate,
+            metrics: ['count'],
+            timeseries_limit_metric: 'sum_sales',
+            groupby: ['category'],
+          },
+          {
+            ownState: {
+              sortBy: [{ key: 'count', desc: false }],
+            },
+          },
+        );
+
+        // ownState.sortBy takes precedence since it represents the
+        // user's most recent click
+        expect(queries[0].orderby).toEqual([['count', true]]);
+      });
+    });
+
     describe('Testing for server pagination with search filter', () => {
       const baseFormDataWithServerPagination: TableChartFormData = {
         ...basicFormData,

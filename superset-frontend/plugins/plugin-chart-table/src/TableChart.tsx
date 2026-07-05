@@ -1528,14 +1528,13 @@ export default function TableChart<D extends DataRecord = DataRecord>(
 
   const handleSortByChange = useCallback(
     (sortBy: SortByItem[]) => {
-      if (!serverPagination) return;
       const modifiedOwnState = {
         ...serverPaginationData,
         sortBy,
       };
       updateTableOwnState(setDataMask, modifiedOwnState);
     },
-    [serverPagination, serverPaginationData, setDataMask],
+    [serverPaginationData, setDataMask],
   );
 
   const handleSearch = (searchText: string) => {

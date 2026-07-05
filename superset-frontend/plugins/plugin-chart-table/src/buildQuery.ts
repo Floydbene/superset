@@ -263,10 +263,7 @@ export const buildQuery: BuildQuery<TableChartFormData> = (
       ...baseQueryObject,
       columns,
       extras,
-      orderby:
-        formData.server_pagination && sortByFromOwnState
-          ? sortByFromOwnState
-          : orderby,
+      orderby: sortByFromOwnState || orderby,
       metrics,
       post_processing: postProcessing,
       time_offsets: timeOffsets,
