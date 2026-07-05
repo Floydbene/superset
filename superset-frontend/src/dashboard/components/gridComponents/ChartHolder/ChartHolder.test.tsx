@@ -155,6 +155,14 @@ describe('ChartHolder', () => {
     ).toEqual(0);
   });
 
+  test('should apply fade-out class by default for theme border styling', async () => {
+    renderWrapper();
+
+    const holder = screen.getByTestId('dashboard-component-chart-holder');
+    expect(holder).toHaveClass('fade-out');
+    expect(holder).not.toHaveClass('fade-in');
+  });
+
   test('should highlight when path matches', async () => {
     const store = createMockStore({
       dashboardState: {

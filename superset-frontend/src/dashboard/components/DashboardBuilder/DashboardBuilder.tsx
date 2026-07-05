@@ -336,11 +336,10 @@ const StyledDashboardContent = styled.div<{
       }
 
       &.fade-out {
-        border: ${theme.dashboardTileBorder ?? 'none'};
+        border: ${theme.dashboardTileBorder ?? `1px solid ${theme.colorBorder}`};
         border-radius: ${theme.dashboardTileBorderRadius ??
         theme.borderRadius}px;
-        box-shadow: ${theme.dashboardTileBoxShadow ??
-        `0 0 0 1px ${addAlpha(theme.colorBorder, 0.5)}`};
+        box-shadow: ${theme.dashboardTileBoxShadow ?? 'none'};
       }
 
       & .missing-chart-container {
